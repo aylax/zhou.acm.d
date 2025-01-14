@@ -12,7 +12,7 @@ struct interval {
   int r;
 };
 
-bool compare(interval a, interval b) {
+bool asc(interval a, interval b) {
   if (a.l == b.l) {
     return a.r < b.r;
   } else {
@@ -29,7 +29,7 @@ void solve0(void) {
     scanf("%d %d", &a[i].l, &a[i].r);
   }
 
-  std::sort(a + 1, a + 1 + n, compare);
+  std::sort(a + 1, a + 1 + n, asc);
 
   i64 len = 0; // 修补长度
   interval tmp = a[1];
@@ -49,13 +49,6 @@ void solve0(void) {
 
 // -------------------------------------------------------------
 using Hash = std::map<int, int>;
-
-void UpdateHash(int t[], int k, Hash &h) { h[t[k]] = k; }
-
-void UpdateByHash(int i, int l[], int r[], Hash &h) {
-  l[i] = h[l[i]];
-  r[i] = h[r[i]];
-}
 
 // 离散化数值
 void solve1(void) {
@@ -79,10 +72,11 @@ void solve1(void) {
   Hash h; // h<K=Tval, V=Tindex>
   // Hash离散化, 更新原数字与离散化之后数字的关系
   for (int k = 1; k <= len; k++) {
-    UpdateHash(t, k, h);
+    h[t[k]] = k;
   }
   for (int i = 1; i <= n; i++) {
-    UpdateByHash(i, l, r, h);
+    l[i] = h[l[i]];
+    r[i] = h[r[i]];
   }
 
   int f[2 * n + 1] = {};

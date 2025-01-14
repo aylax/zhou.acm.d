@@ -12,7 +12,7 @@ struct data {
 
 bool contains(Hash &h, int key) { return h.find(key) != h.end(); }
 
-bool compare(data a, data b) { return a.x < b.x; }
+bool asc(data a, data b) { return a.x < b.x; }
 
 // 离散化ID + 双端队列
 void solve(void) {
@@ -31,7 +31,7 @@ void solve(void) {
     }
   }
 
-  std::sort(a + 1, a + 1 + n, compare); // 对元素升序排列
+  std::sort(a + 1, a + 1 + n, asc); // 对元素升序排列
 
   int ret = 1e9;
   int head = 1;                // head

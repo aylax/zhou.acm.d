@@ -10,7 +10,7 @@ struct data {
   int t;
 };
 
-bool compare(data &a, data &b) { return a.t < b.t; }
+bool asc(data &a, data &b) { return a.t < b.t; }
 
 void solve(void) {
   int n;
@@ -22,7 +22,7 @@ void solve(void) {
     scanf("%d", &a[i].t);
   }
 
-  std::sort(a.begin(), a.end(), compare);
+  std::sort(a.begin(), a.end(), asc);
 
   int tot = 0, i = 0;
   for (auto [k, t] : a) {

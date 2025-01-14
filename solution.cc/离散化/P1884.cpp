@@ -7,20 +7,6 @@ using i64 = long long;
 
 using Hash = std::map<int, int>;
 
-void UpdateTable(int t[], int ri[4], int len) {
-  for (int j = 0; j < 4; j++) {
-    t[len + j + 1] = ri[j];
-  }
-}
-
-void UpdateHash(int t[], int k, Hash &h) { h[t[k]] = k; }
-
-void UpdateByHash(int ri[4], Hash &h) {
-  for (int j = 0; j < 4; j++) {
-    ri[j] = h[ri[j]];
-  }
-}
-
 // 离散化数据 + 差分数组
 // 矩形对角坐标: d[(0, 5), (4, 1)]
 // 对角坐标转换: d[(1, 0), (5, 1)]
@@ -37,7 +23,9 @@ void solve(void) {
     // 笛卡尔坐标 -> 数组行列
     scanf("%d %d", &r[i][1], &r[i][2]); // [Y1, X2]
     scanf("%d %d", &r[i][3], &r[i][0]); // [Y2, X1]
-    UpdateTable(t, r[i], len);
+    for (int j = 0; j < 4; j++) {
+      t[len + j + 1] = r[i][j];
+    }
     len = len + 4;
   }
 
@@ -48,10 +36,12 @@ void solve(void) {
   Hash h; // h<K=Tval, V=Tindex>
   // Hash离散化, 更新原数字与离散化之后数字的关系
   for (int k = 1; k <= len; k++) {
-    UpdateHash(t, k, h);
+    h[t[k]] = k;
   }
   for (int i = 1; i <= n; i++) {
-    UpdateByHash(r[i], h);
+    for (int j = 0; j < 4; j++) {
+      r[i][j] = h[r[i][j]];
+    }
   }
 
   // 二维差分矩阵上统计覆盖区域

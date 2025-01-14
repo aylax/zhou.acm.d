@@ -65,14 +65,7 @@ struct node {
 node a[MAXN];    // 原始数据
 int b[MAXN * 2]; // 离散化数据
 
-bool compare(node &a, node &b) { return a.p > b.p; }
-
-void UpdateHash(int k, Hash &hash) { hash[b[k]] = k; }
-
-void UpdateByHash(int i, Hash &hash) {
-  a[i].x = hash[a[i].x];
-  a[i].y = hash[a[i].y];
-}
+bool desc(node &a, node &b) { return a.p > b.p; }
 
 // 先将p==1的所有关系录入
 // 再判断p!=1时的关系, 简化并差集空间
@@ -96,17 +89,18 @@ void solveOnce() {
   // Hash离散化, 更新原数字与离散化之后数字的关系
   Hash hash;
   for (int k = 1; k <= n; k++) {
-    UpdateHash(k, hash);
+    hash[b[k]] = k;
   }
   for (int i = 1; i <= m; i++) {
-    UpdateByHash(i, hash);
+    a[i].x = hash[a[i].x];
+    a[i].y = hash[a[i].y];
   }
 
   // [1, n] 相等域;
   quickunion::DSU dsu = quickunion::DSU(n + 1);
 
   // 将相等的判定(p==1)放在前面
-  std::sort(a + 1, a + 1 + m, compare);
+  std::sort(a + 1, a + 1 + m, desc);
   // 集合合并 and 判断
   for (int i = 1; i <= m; i++) {
     auto [p, x, y] = a[i];

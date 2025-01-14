@@ -60,7 +60,7 @@ struct node {
 };
 
 // 根据冲突值由大到小排序
-bool comapre(const node &a, const node &b) { return a.c > b.c; }
+bool desc(const node &a, const node &b) { return a.c > b.c; }
 
 void solve(void) {
   int n, m;
@@ -72,7 +72,7 @@ void solve(void) {
   }
 
   // 按冲突值降序排列
-  std::sort(a + 1, a + 1 + m, comapre);
+  std::sort(a + 1, a + 1 + m, desc);
 
   // 开两倍数组空间
   // DSU[1-n]存队友关系, DSU[n+1, 2n]存敌人关系

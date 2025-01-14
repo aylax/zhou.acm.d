@@ -10,7 +10,7 @@ struct data {
   int q; // amount
 };
 
-bool compare(data &a, data &b) { return a.p < b.p; }
+bool asc(data &a, data &b) { return a.p < b.p; }
 
 void solve(void) {
   int s, n;
@@ -21,7 +21,7 @@ void solve(void) {
     scanf("%d %d", &a[i].p, &a[i].q);
   }
 
-  std::sort(a.begin(), a.end(), compare);
+  std::sort(a.begin(), a.end(), asc);
 
   int tot = 0;
   for (auto [p, q] : a) {

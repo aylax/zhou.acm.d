@@ -11,7 +11,7 @@ struct node {
 };
 
 // 按照投入时间比较元素
-bool compare(const node &a, const node &b) { return a.t < b.t; }
+bool asc(const node &a, const node &b) { return a.t < b.t; }
 
 // 0-1背包问题
 // 转移方程: 时间复杂度 O(n*m)
@@ -29,7 +29,7 @@ void solve(void) {
   }
 
   // 按照投入时间排序
-  std::sort(a + 1, a + n + 1, compare);
+  std::sort(a + 1, a + n + 1, asc);
 
   int f[m + 1] = {10}; // 最久存活时间
   for (int i = 1; i <= n; i++) {

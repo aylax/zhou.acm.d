@@ -11,7 +11,7 @@ struct data {
   int t; // 工作耗时
 };
 
-bool compare(data &a, data &b) { return a.s > b.s; }
+bool desc(data &a, data &b) { return a.s > b.s; }
 
 void solve(void) {
   int n;
@@ -22,7 +22,7 @@ void solve(void) {
     scanf("%d %d", &a[i].t, &a[i].s);
   }
 
-  std::sort(a.begin(), a.end(), compare);
+  std::sort(a.begin(), a.end(), desc);
 
   int r = INT_MAX; // 最迟开始时刻
   for (auto [s, t] : a) {
