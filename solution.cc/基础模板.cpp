@@ -1,7 +1,10 @@
 // == Code Location ==
 #include <cstdio>
+#include <vector>
 
-void solve(void) { printf("program running...\n"); }
+template <typename T> using vec = std::vector<T>;
+
+void solve(void) {}
 
 int main() {
   freopen("data.in", "r", stdin);
